@@ -1,0 +1,165 @@
+{
+  "gifts": [
+    {
+      "title": "🎮 Беспроводной геймпад",
+      "description": "Универсальный геймпад для ПК, PlayStation и Nintendo Switch. Эргономичный дизайн, вибрация, работа до 20 часов.",
+      "price": "890₽",
+      "image_url": "https://placehold.co/600x400/2563eb/white?text=Gamepad",
+      "affiliate_link": "https://ozon.ru",
+      "category": "man"
+    },
+    {
+      "title": "🍺 Набор крафтового пива",
+      "description": "Подарочный набор из 6 сортов крафтового пива. Идеален для дегустации и открытия новых вкусов.",
+      "price": "950₽",
+      "image_url": "https://placehold.co/600x400/dc2626/white?text=Beer+Set",
+      "affiliate_link": "https://ozon.ru",
+      "category": "man"
+    },
+    {
+      "title": "🎧 Беспроводные наушники TWS",
+      "description": "Качественный звук, шумоподавление, зарядный кейс на 24 часа. Отличный подарок для меломана.",
+      "price": "2990₽",
+      "image_url": "https://placehold.co/600x400/7c3aed/white?text=Headphones",
+      "affiliate_link": "https://ozon.ru",
+      "category": "man"
+    },
+    {
+      "title": "⌚ Умные часы Smart Watch",
+      "description": "Фитнес-трекер, мониторинг сна, пульсометр, уведомления со смартфона. Водонепроницаемые.",
+      "price": "3500₽",
+      "image_url": "https://placehold.co/600x400/0891b2/white?text=Smart+Watch",
+      "affiliate_link": "https://ozon.ru",
+      "category": "man"
+    },
+    {
+      "title": "📱 Портативная колонка JBL",
+      "description": "Мощный звук, басы, защита от воды IPX7. Работает до 12 часов. Идеал для путешествий.",
+      "price": "7990₽",
+      "image_url": "https://placehold.co/600x400/ea580c/white?text=Speaker",
+      "affiliate_link": "https://ozon.ru",
+      "category": "man"
+    },
+    {
+      "title": "💄 Набор косметики",
+      "description": "Палетка теней, тушь, блеск для губ. Натуральные оттенки, гипоаллергенно.",
+      "price": "890₽",
+      "image_url": "https://placehold.co/600x400/ec4899/white?text=Cosmetics",
+      "affiliate_link": "https://ozon.ru",
+      "category": "woman"
+    },
+    {
+      "title": "🕯️ Ароматические свечи",
+      "description": "Набор из 3 свечей: лаванда, ваниль, цитрус. Соевый воск, 20 часов горения.",
+      "price": "750₽",
+      "image_url": "https://placehold.co/600x400/a855f7/white?text=Candles",
+      "affiliate_link": "https://ozon.ru",
+      "category": "woman"
+    },
+    {
+      "title": "👜 Женская сумка-клатч",
+      "description": "Экокожа, несколько отделений, цепочка-ремешок. Элегантный дизайн.",
+      "price": "2990₽",
+      "image_url": "https://placehold.co/600x400/db2777/white?text=Bag",
+      "affiliate_link": "https://ozon.ru",
+      "category": "woman"
+    },
+    {
+      "title": "💍 Серебряные серьги",
+      "description": "925 проба, фианиты. Гипоаллергенны, универсальный дизайн.",
+      "price": "3500₽",
+      "image_url": "https://placehold.co/600x400/f472b6/white?text=Earrings",
+      "affiliate_link": "https://ozon.ru",
+      "category": "woman"
+    },
+    {
+      "title": "💅 Маникюрный набор премиум",
+      "description": "Профессиональный набор: UV-лампа, фрезер, гель-лаки. Салон на дому!",
+      "price": "7990₽",
+      "image_url": "https://placehold.co/600x400/e879f9/white?text=Nail+Kit",
+      "affiliate_link": "https://ozon.ru",
+      "category": "woman"
+    },
+    {
+      "title": "🎨 Скетчбук для рисования",
+      "description": "А4, плотная бумага 120г/м², 80 листов. Для карандашей, маркеров.",
+      "price": "490₽",
+      "image_url": "https://placehold.co/600x400/f97316/white?text=Sketchbook",
+      "affiliate_link": "https://ozon.ru",
+      "category": "teen"
+    },
+    {
+      "title": "🎮 Игровая мышь",
+      "description": "RGB-подсветка, 6 кнопок, DPI до 3200. Эргономичная форма.",
+      "price": "890₽",
+      "image_url": "https://placehold.co/600x400/6366f1/white?text=Gaming+Mouse",
+      "affiliate_link": "https://ozon.ru",
+      "category": "teen"
+    },
+    {
+      "title": "🎧 Накладные наушники",
+      "description": "Студийное качество звука, складные, съемный кабель с микрофоном.",
+      "price": "2490₽",
+      "image_url": "https://placehold.co/600x400/8b5cf6/white?text=Headphones",
+      "affiliate_link": "https://ozon.ru",
+      "category": "teen"
+    },
+    {
+      "title": "🛹 Скейтборд",
+      "description": "Канадский клен, подшипники ABEC-7, дизайнерская дека.",
+      "price": "3200₽",
+      "image_url": "https://placehold.co/600x400/14b8a6/white?text=Skateboard",
+      "affiliate_link": "https://ozon.ru",
+      "category": "teen"
+    },
+    {
+      "title": "🎮 Механическая клавиатура",
+      "description": "RGB, переключатели Blue, металлический корпус. Для геймеров.",
+      "price": "5990₽",
+      "image_url": "https://placehold.co/600x400/3b82f6/white?text=Keyboard",
+      "affiliate_link": "https://ozon.ru",
+      "category": "teen"
+    },
+    {
+      "title": "🧸 Мягкая игрушка",
+      "description": "Плюшевый мишка 40 см, гипоаллергенный наполнитель. Можно стирать.",
+      "price": "590₽",
+      "image_url": "https://placehold.co/600x400/f59e0b/white?text=Teddy+Bear",
+      "affiliate_link": "https://ozon.ru",
+      "category": "child"
+    },
+    {
+      "title": "🎨 Набор для творчества",
+      "description": "Пластилин, краски, кисти, раскраски. 30+ предметов.",
+      "price": "790₽",
+      "image_url": "https://placehold.co/600x400/ef4444/white?text=Art+Set",
+      "affiliate_link": "https://ozon.ru",
+      "category": "child"
+    },
+    {
+      "title": "🚗 Радиоуправляемая машина",
+      "description": "Масштаб 1:18, скорость до 20 км/ч, работает до 30 минут.",
+      "price": "2490₽",
+      "image_url": "https://placehold.co/600x400/dc2626/white?text=RC+Car",
+      "affiliate_link": "https://ozon.ru",
+      "category": "child"
+    },
+    {
+      "title": "🧱 Конструктор LEGO",
+      "description": "Совместим с LEGO, 500 деталей, инструкция. Развивает моторику.",
+      "price": "2990₽",
+      "image_url": "https://placehold.co/600x400/16a34a/white?text=LEGO",
+      "affiliate_link": "https://ozon.ru",
+      "category": "child"
+    },
+    {
+      "title": "🚴 Детский самокат",
+      "description": "3 колеса, светящиеся колеса, регулируемая ручка. До 50 кг.",
+      "price": "5990₽",
+      "image_url": "https://placehold.co/600x400/06b6d4/white?text=Scooter",
+      "affiliate_link": "https://ozon.ru",
+      "category": "child"
+    }
+  ]
+}
+
