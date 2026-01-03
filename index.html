@@ -10,50 +10,142 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --secondary-text: #707579;
+            --bg-color: #f5f5f7;
+            --text-color: #1d1d1f;
+            --secondary-text: #86868b;
             --card-bg: #ffffff;
-            --accent-color: #3390ec;
-            --border-color: #e5e5ea;
-            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --accent-color: #007aff;
+            --border-color: #d2d2d7;
+            --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            --skeleton-bg: #e5e5ea;
+            --skeleton-shimmer: #f5f5f7;
+            --selected-border: #007aff;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            padding: 16px;
-            padding-bottom: 80px;
-            line-height: 1.5;
+            padding: 0;
+            padding-bottom: 90px;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
         }
 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Header */
         .header {
-            text-align: center;
-            padding: 20px 0;
-            margin-bottom: 20px;
+            background: var(--card-bg);
+            padding: 16px 0 12px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 0 var(--border-color);
         }
 
         .header h1 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 8px;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4px;
+            letter-spacing: -0.03em;
         }
 
         .header p {
+            text-align: center;
             color: var(--secondary-text);
-            font-size: 14px;
+            font-size: 15px;
         }
 
+        /* Search Bar - iOS Style */
+        .search-section {
+            background: var(--card-bg);
+            padding: 12px 0;
+            position: sticky;
+            top: 93px;
+            z-index: 99;
+            box-shadow: 0 1px 0 var(--border-color);
+        }
+
+        .search-container {
+            position: relative;
+            margin: 0 16px;
+        }
+
+        .search-wrapper {
+            position: relative;
+            background: var(--skeleton-bg);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .search-wrapper:focus-within {
+            background: var(--card-bg);
+            box-shadow: 0 0 0 2px var(--accent-color);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: var(--secondary-text);
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 40px 10px 40px;
+            border: none;
+            background: transparent;
+            color: var(--text-color);
+            font-size: 17px;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--secondary-text);
+        }
+
+        .clear-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--secondary-text);
+            border: none;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-input:not(:placeholder-shown) ~ .clear-btn {
+            display: flex;
+        }
+
+        /* Filters */
         .filters {
             display: flex;
             gap: 8px;
             overflow-x: auto;
-            padding: 10px 0;
-            margin-bottom: 20px;
+            padding: 16px 16px 12px;
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
@@ -65,20 +157,15 @@
         .filter-btn {
             padding: 8px 16px;
             border: 1px solid var(--border-color);
-            border-radius: 20px;
+            border-radius: 18px;
             background: var(--card-bg);
             color: var(--text-color);
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: 500;
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.3s ease;
             flex-shrink: 0;
-        }
-
-        .filter-btn:hover {
-            background: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
         }
 
         .filter-btn.active {
@@ -87,31 +174,89 @@
             border-color: var(--accent-color);
         }
 
+        /* Products Grid */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            margin-bottom: 20px;
+            padding: 0 16px 20px;
         }
 
         .product-card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.2s ease;
-            border: 1px solid var(--border-color);
+            border: 2px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .product-card:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
+        }
+
+        .product-card.selected {
+            border-color: var(--selected-border);
+            box-shadow: 0 4px 20px rgba(0, 122, 255, 0.3);
+        }
+
+        /* Image Container with Skeleton */
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background: var(--skeleton-bg);
+            overflow: hidden;
+        }
+
+        .skeleton {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                var(--skeleton-bg) 0%,
+                var(--skeleton-shimmer) 50%,
+                var(--skeleton-bg) 100%
+            );
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
         }
 
         .product-image {
             width: 100%;
-            height: 160px;
+            height: 100%;
             object-fit: cover;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-image.loaded {
+            opacity: 1;
         }
 
         .product-info {
@@ -119,9 +264,9 @@
         }
 
         .product-title {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -130,63 +275,88 @@
         }
 
         .product-description {
-            font-size: 12px;
+            font-size: 13px;
             color: var(--secondary-text);
             margin-bottom: 8px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-        }
-
-        .product-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
+            line-height: 1.4;
         }
 
         .product-price {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--accent-color);
         }
 
-        .buy-btn {
-            padding: 6px 14px;
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .buy-btn:active {
-            opacity: 0.8;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: var(--secondary-text);
-        }
-
+        /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 40px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
         }
 
         .empty-state h3 {
-            font-size: 18px;
+            font-size: 20px;
+            font-weight: 600;
             margin-bottom: 8px;
         }
 
         .empty-state p {
             color: var(--secondary-text);
-            font-size: 14px;
+            font-size: 15px;
+        }
+
+        /* Stats */
+        .stats {
+            text-align: center;
+            padding: 8px 16px;
+            color: var(--secondary-text);
+            font-size: 13px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 500;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --bg-color: #000000;
+            --text-color: #f5f5f7;
+            --secondary-text: #86868b;
+            --card-bg: #1c1c1e;
+            --border-color: #38383a;
+            --shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+            --skeleton-bg: #2c2c2e;
+            --skeleton-shimmer: #3a3a3c;
         }
 
         @media (min-width: 768px) {
@@ -195,8 +365,8 @@
                 gap: 16px;
             }
 
-            .product-image {
-                height: 200px;
+            .image-container {
+                height: 220px;
             }
         }
 
@@ -209,8 +379,26 @@
 </head>
 <body>
     <div class="header">
-        <h1>🎁 Gift Guru Store</h1>
-        <p>Идеальные подарки для любого повода</p>
+        <div class="container">
+            <h1>🎁 Gift Guru</h1>
+            <p>Идеальные подарки для любого повода</p>
+        </div>
+    </div>
+
+    <div class="search-section">
+        <div class="search-container">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    id="searchInput" 
+                    placeholder="Поиск"
+                    autocomplete="off"
+                >
+                <button class="clear-btn" id="clearBtn">×</button>
+            </div>
+        </div>
     </div>
 
     <div class="filters" id="filters">
@@ -221,260 +409,367 @@
         <button class="filter-btn" data-filter="child">👶 Ребенку</button>
     </div>
 
-    <div id="products-container">
-        <div class="loading">Загрузка товаров...</div>
-    </div>
+    <div class="stats" id="stats"></div>
+
+    <div class="products-grid" id="productsGrid"></div>
+
+    <div class="toast" id="toast"></div>
 
     <script>
-        // Инициализация Telegram WebApp
+        // Telegram WebApp API
         const tg = window.Telegram.WebApp;
         tg.expand();
         tg.ready();
+        tg.enableClosingConfirmation();
 
-        // Применяем цветовую схему Telegram
+        // Применяем тему
         if (tg.colorScheme === 'dark') {
-            document.documentElement.style.setProperty('--bg-color', '#18222d');
-            document.documentElement.style.setProperty('--text-color', '#ffffff');
-            document.documentElement.style.setProperty('--secondary-text', '#8e9296');
-            document.documentElement.style.setProperty('--card-bg', '#232e3c');
-            document.documentElement.style.setProperty('--border-color', '#2b3847');
-            document.documentElement.style.setProperty('--shadow', '0 2px 8px rgba(0, 0, 0, 0.3)');
+            document.body.setAttribute('data-theme', 'dark');
         }
 
-        // База данных товаров (в реальном проекте загружается с сервера)
-        const giftsDatabase = {
-            "man_birthday_low": [
-                {
-                    "title": "🎮 Беспроводной геймпад",
-                    "description": "Универсальный геймпад для ПК, PlayStation и Nintendo Switch.",
-                    "price": "890₽",
-                    "image_url": "https://placehold.co/600x400/2563eb/white?text=Gamepad",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "man"
-                },
-                {
-                    "title": "🍺 Набор крафтового пива",
-                    "description": "Подарочный набор из 6 сортов крафтового пива.",
-                    "price": "950₽",
-                    "image_url": "https://placehold.co/600x400/dc2626/white?text=Beer+Set",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "man"
-                }
-            ],
-            "man_birthday_medium": [
-                {
-                    "title": "🎧 Беспроводные наушники TWS",
-                    "description": "Качественный звук, шумоподавление, зарядный кейс на 24 часа.",
-                    "price": "2990₽",
-                    "image_url": "https://placehold.co/600x400/7c3aed/white?text=Headphones",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "man"
-                },
-                {
-                    "title": "⌚ Умные часы Smart Watch",
-                    "description": "Фитнес-трекер, мониторинг сна, пульсометр.",
-                    "price": "3500₽",
-                    "image_url": "https://placehold.co/600x400/0891b2/white?text=Smart+Watch",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "man"
-                }
-            ],
-            "woman_birthday_low": [
-                {
-                    "title": "💄 Набор косметики",
-                    "description": "Палетка теней, тушь, блеск для губ. Натуральные оттенки.",
-                    "price": "890₽",
-                    "image_url": "https://placehold.co/600x400/ec4899/white?text=Cosmetics",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "woman"
-                },
-                {
-                    "title": "🕯️ Ароматические свечи",
-                    "description": "Набор из 3 свечей: лаванда, ваниль, цитрус.",
-                    "price": "750₽",
-                    "image_url": "https://placehold.co/600x400/a855f7/white?text=Candles",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "woman"
-                }
-            ],
-            "woman_birthday_medium": [
-                {
-                    "title": "👜 Женская сумка-клатч",
-                    "description": "Экокожа, несколько отделений, элегантный дизайн.",
-                    "price": "2990₽",
-                    "image_url": "https://placehold.co/600x400/db2777/white?text=Bag",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "woman"
-                },
-                {
-                    "title": "💍 Серебряные серьги",
-                    "description": "925 проба, фианиты. Гипоаллергенны.",
-                    "price": "3500₽",
-                    "image_url": "https://placehold.co/600x400/f472b6/white?text=Earrings",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "woman"
-                }
-            ],
-            "teen_birthday_low": [
-                {
-                    "title": "🎨 Скетчбук для рисования",
-                    "description": "А4, плотная бумага 120г/м², 80 листов.",
-                    "price": "490₽",
-                    "image_url": "https://placehold.co/600x400/f97316/white?text=Sketchbook",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "teen"
-                },
-                {
-                    "title": "🎮 Игровая мышь",
-                    "description": "RGB-подсветка, 6 кнопок, DPI до 3200.",
-                    "price": "890₽",
-                    "image_url": "https://placehold.co/600x400/6366f1/white?text=Gaming+Mouse",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "teen"
-                }
-            ],
-            "teen_birthday_medium": [
-                {
-                    "title": "🎧 Накладные наушники",
-                    "description": "Студийное качество звука, складные.",
-                    "price": "2490₽",
-                    "image_url": "https://placehold.co/600x400/8b5cf6/white?text=Headphones",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "teen"
-                },
-                {
-                    "title": "🛹 Скейтборд",
-                    "description": "Канадский клен, подшипники ABEC-7.",
-                    "price": "3200₽",
-                    "image_url": "https://placehold.co/600x400/14b8a6/white?text=Skateboard",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "teen"
-                }
-            ],
-            "child_birthday_low": [
-                {
-                    "title": "🧸 Мягкая игрушка",
-                    "description": "Плюшевый мишка 40 см, гипоаллергенный.",
-                    "price": "590₽",
-                    "image_url": "https://placehold.co/600x400/f59e0b/white?text=Teddy+Bear",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "child"
-                },
-                {
-                    "title": "🎨 Набор для творчества",
-                    "description": "Пластилин, краски, кисти, раскраски. 30+ предметов.",
-                    "price": "790₽",
-                    "image_url": "https://placehold.co/600x400/ef4444/white?text=Art+Set",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "child"
-                }
-            ],
-            "child_birthday_medium": [
-                {
-                    "title": "🚗 Радиоуправляемая машина",
-                    "description": "Масштаб 1:18, скорость до 20 км/ч.",
-                    "price": "2490₽",
-                    "image_url": "https://placehold.co/600x400/dc2626/white?text=RC+Car",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "child"
-                },
-                {
-                    "title": "🧱 Конструктор LEGO",
-                    "description": "Совместим с LEGO, 500 деталей.",
-                    "price": "2990₽",
-                    "image_url": "https://placehold.co/600x400/16a34a/white?text=LEGO",
-                    "affiliate_link": "https://ozon.ru",
-                    "category": "child"
-                }
-            ]
-        };
-
-        // Преобразуем в плоский массив
-        let allProducts = [];
-        Object.values(giftsDatabase).forEach(products => {
-            allProducts = allProducts.concat(products);
-        });
+        // База данных товаров
+        const products = [
+            {
+                id: 1,
+                title: "🎮 Беспроводной геймпад",
+                description: "Универсальный геймпад для ПК, PlayStation и Nintendo Switch",
+                price: 890,
+                image: "https://placehold.co/600x400/2563eb/white?text=Gamepad",
+                link: "https://ozon.ru",
+                category: "man"
+            },
+            {
+                id: 2,
+                title: "🍺 Набор крафтового пива",
+                description: "Подарочный набор из 6 сортов крафтового пива",
+                price: 950,
+                image: "https://placehold.co/600x400/dc2626/white?text=Beer+Set",
+                link: "https://ozon.ru",
+                category: "man"
+            },
+            {
+                id: 3,
+                title: "🎧 Беспроводные наушники TWS",
+                description: "Качественный звук, шумоподавление, зарядный кейс на 24 часа",
+                price: 2990,
+                image: "https://placehold.co/600x400/7c3aed/white?text=Headphones",
+                link: "https://ozon.ru",
+                category: "man"
+            },
+            {
+                id: 4,
+                title: "⌚ Умные часы Smart Watch",
+                description: "Фитнес-трекер, мониторинг сна, пульсометр",
+                price: 3500,
+                image: "https://placehold.co/600x400/0891b2/white?text=Smart+Watch",
+                link: "https://ozon.ru",
+                category: "man"
+            },
+            {
+                id: 5,
+                title: "💄 Набор косметики",
+                description: "Палетка теней, тушь, блеск для губ",
+                price: 890,
+                image: "https://placehold.co/600x400/ec4899/white?text=Cosmetics",
+                link: "https://ozon.ru",
+                category: "woman"
+            },
+            {
+                id: 6,
+                title: "🕯️ Ароматические свечи",
+                description: "Набор из 3 свечей: лаванда, ваниль, цитрус",
+                price: 750,
+                image: "https://placehold.co/600x400/a855f7/white?text=Candles",
+                link: "https://ozon.ru",
+                category: "woman"
+            },
+            {
+                id: 7,
+                title: "👜 Женская сумка-клатч",
+                description: "Экокожа, несколько отделений, элегантный дизайн",
+                price: 2990,
+                image: "https://placehold.co/600x400/db2777/white?text=Bag",
+                link: "https://ozon.ru",
+                category: "woman"
+            },
+            {
+                id: 8,
+                title: "💍 Серебряные серьги",
+                description: "925 проба, фианиты, гипоаллергенны",
+                price: 3500,
+                image: "https://placehold.co/600x400/f472b6/white?text=Earrings",
+                link: "https://ozon.ru",
+                category: "woman"
+            },
+            {
+                id: 9,
+                title: "🎨 Скетчбук для рисования",
+                description: "А4, плотная бумага 120г/м², 80 листов",
+                price: 490,
+                image: "https://placehold.co/600x400/f97316/white?text=Sketchbook",
+                link: "https://ozon.ru",
+                category: "teen"
+            },
+            {
+                id: 10,
+                title: "🎮 Игровая мышь",
+                description: "RGB-подсветка, 6 кнопок, DPI до 3200",
+                price: 890,
+                image: "https://placehold.co/600x400/6366f1/white?text=Gaming+Mouse",
+                link: "https://ozon.ru",
+                category: "teen"
+            },
+            {
+                id: 11,
+                title: "🎧 Накладные наушники",
+                description: "Студийное качество звука, складные",
+                price: 2490,
+                image: "https://placehold.co/600x400/8b5cf6/white?text=Headphones",
+                link: "https://ozon.ru",
+                category: "teen"
+            },
+            {
+                id: 12,
+                title: "🛹 Скейтборд",
+                description: "Канадский клен, подшипники ABEC-7",
+                price: 3200,
+                image: "https://placehold.co/600x400/14b8a6/white?text=Skateboard",
+                link: "https://ozon.ru",
+                category: "teen"
+            },
+            {
+                id: 13,
+                title: "🧸 Мягкая игрушка",
+                description: "Плюшевый мишка 40 см, гипоаллергенный",
+                price: 590,
+                image: "https://placehold.co/600x400/f59e0b/white?text=Teddy+Bear",
+                link: "https://ozon.ru",
+                category: "child"
+            },
+            {
+                id: 14,
+                title: "🎨 Набор для творчества",
+                description: "Пластилин, краски, кисти, раскраски",
+                price: 790,
+                image: "https://placehold.co/600x400/ef4444/white?text=Art+Set",
+                link: "https://ozon.ru",
+                category: "child"
+            },
+            {
+                id: 15,
+                title: "🚗 Радиоуправляемая машина",
+                description: "Масштаб 1:18, скорость до 20 км/ч",
+                price: 2490,
+                image: "https://placehold.co/600x400/dc2626/white?text=RC+Car",
+                link: "https://ozon.ru",
+                category: "child"
+            },
+            {
+                id: 16,
+                title: "🧱 Конструктор LEGO",
+                description: "Совместим с LEGO, 500 деталей",
+                price: 2990,
+                image: "https://placehold.co/600x400/16a34a/white?text=LEGO",
+                link: "https://ozon.ru",
+                category: "child"
+            }
+        ];
 
         let currentFilter = 'all';
+        let searchQuery = '';
+        let selectedProduct = null;
 
-        // Функция рендеринга товаров
-        function renderProducts(filter = 'all') {
-            const container = document.getElementById('products-container');
+        // Настройка MainButton
+        tg.MainButton.color = tg.themeParams.button_color || '#007aff';
+        tg.MainButton.textColor = tg.themeParams.button_text_color || '#ffffff';
+
+        // Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
             
-            let filteredProducts = allProducts;
-            if (filter !== 'all') {
-                filteredProducts = allProducts.filter(p => p.category === filter);
+            if (tg.HapticFeedback) {
+                tg.HapticFeedback.notificationOccurred('success');
             }
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
 
-            if (filteredProducts.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <h3>😔 Товары не найдены</h3>
-                        <p>Попробуйте выбрать другую категорию</p>
+        // Рендер товаров
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const stats = document.getElementById('stats');
+            
+            let filtered = products;
+            
+            // Фильтр по категории
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(p => p.category === currentFilter);
+            }
+            
+            // Поиск
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                filtered = filtered.filter(p => 
+                    p.title.toLowerCase().includes(query) ||
+                    p.description.toLowerCase().includes(query)
+                );
+            }
+            
+            // Статистика
+            stats.textContent = filtered.length > 0 ? `${filtered.length} ${getProductWord(filtered.length)}` : '';
+            
+            // Empty state
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <div class="empty-state-icon">🔍</div>
+                        <h3>${searchQuery ? 'Ничего не найдено' : 'Товары не найдены'}</h3>
+                        <p>${searchQuery ? 'Попробуйте изменить запрос' : 'Выберите другую категорию'}</p>
                     </div>
                 `;
                 return;
             }
-
-            const productsHTML = filteredProducts.map(product => `
-                <div class="product-card">
-                    <img src="${product.image_url}" alt="${product.title}" class="product-image" loading="lazy">
+            
+            // Рендер карточек
+            grid.innerHTML = filtered.map(product => `
+                <div class="product-card ${selectedProduct?.id === product.id ? 'selected' : ''}" data-id="${product.id}">
+                    <div class="image-container">
+                        <div class="skeleton"></div>
+                        <img 
+                            src="${product.image}" 
+                            alt="${product.title}"
+                            class="product-image"
+                            onload="this.classList.add('loaded'); this.previousElementSibling.style.display='none';"
+                        >
+                    </div>
                     <div class="product-info">
                         <div class="product-title">${product.title}</div>
                         <div class="product-description">${product.description}</div>
-                        <div class="product-footer">
-                            <div class="product-price">${product.price}</div>
-                            <button class="buy-btn" onclick="buyProduct('${product.affiliate_link}')">Купить</button>
-                        </div>
+                        <div class="product-price">${product.price}₽</div>
                     </div>
                 </div>
             `).join('');
-
-            container.innerHTML = `<div class="products-grid">${productsHTML}</div>`;
-        }
-
-        // Функция покупки
-        function buyProduct(link) {
-            // Вибрация при клике (если поддерживается)
-            if (tg.HapticFeedback) {
-                tg.HapticFeedback.impactOccurred('medium');
-            }
-
-            // Открываем ссылку
-            tg.openLink(link);
-        }
-
-        // Обработка фильтров
-        document.getElementById('filters').addEventListener('click', (e) => {
-            if (e.target.classList.contains('filter-btn')) {
-                // Убираем active со всех кнопок
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
+            
+            // Клик на карточку
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const id = parseInt(card.dataset.id);
+                    selectProduct(id);
                 });
+            });
+        }
 
-                // Добавляем active на текущую
-                e.target.classList.add('active');
+        // Выбор товара
+        function selectProduct(id) {
+            selectedProduct = products.find(p => p.id === id);
+            
+            // Haptic Feedback
+            if (tg.HapticFeedback) {
+                tg.HapticFeedback.selectionChanged();
+            }
+            
+            // Обновляем карточки
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelector(`[data-id="${id}"]`).classList.add('selected');
+            
+            // Показываем MainButton
+            tg.MainButton.setText(`КУПИТЬ ЗА ${selectedProduct.price}₽`);
+            tg.MainButton.show();
+        }
 
-                // Применяем фильтр
-                const filter = e.target.dataset.filter;
-                currentFilter = filter;
-                renderProducts(filter);
-
-                // Вибрация
+        // Обработчик MainButton
+        tg.MainButton.onClick(() => {
+            if (selectedProduct) {
+                // Сильная вибрация
                 if (tg.HapticFeedback) {
-                    tg.HapticFeedback.impactOccurred('light');
+                    tg.HapticFeedback.notificationOccurred('success');
                 }
+                
+                showToast('Переходим в магазин...');
+                
+                setTimeout(() => {
+                    tg.openLink(selectedProduct.link);
+                }, 800);
             }
         });
 
-        // Инициализация
-        setTimeout(() => {
-            renderProducts();
-        }, 500);
+        // Фильтры
+        document.getElementById('filters').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                // Haptic Feedback
+                if (tg.HapticFeedback) {
+                    tg.HapticFeedback.selectionChanged();
+                }
+                
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                e.target.classList.add('active');
+                
+                currentFilter = e.target.dataset.filter;
+                renderProducts();
+                
+                // Скрываем MainButton при смене категории
+                tg.MainButton.hide();
+                selectedProduct = null;
+            }
+        });
 
-        // Уведомляем Telegram, что приложение готово
+        // Поиск
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearBtn');
+        let searchTimeout;
+
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                searchQuery = e.target.value.trim();
+                renderProducts();
+                
+                // Легкая вибрация при вводе
+                if (searchQuery && tg.HapticFeedback) {
+                    tg.HapticFeedback.selectionChanged();
+                }
+                
+                // Скрываем MainButton при поиске
+                tg.MainButton.hide();
+                selectedProduct = null;
+            }, 200);
+        });
+
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchQuery = '';
+            renderProducts();
+            searchInput.focus();
+        });
+
+        // Склонение слова "товар"
+        function getProductWord(count) {
+            const lastDigit = count % 10;
+            const lastTwo = count % 100;
+            
+            if (lastTwo >= 11 && lastTwo <= 19) {
+                return 'товаров';
+            }
+            if (lastDigit === 1) {
+                return 'товар';
+            }
+            if (lastDigit >= 2 && lastDigit <= 4) {
+                return 'товара';
+            }
+            return 'товаров';
+        }
+
+        // Инициализация
+        renderProducts();
         tg.ready();
     </script>
 </body>
 </html>
-
